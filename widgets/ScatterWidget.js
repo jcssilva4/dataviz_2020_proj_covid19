@@ -1,6 +1,6 @@
 class ScatterWidget{
 	
-    constructor(container){
+    constructor(container, nodes){
 		this.container = container;
 		// dropdown menu - epidem time series
 		this.opts_y_axis = [{ "text": "Casos Ativos", "value": "cases" },
@@ -38,20 +38,22 @@ class ScatterWidget{
 	    var temp = this.container
 		temp.select("div").remove()
 
-		dates = Object.keys(selected_nodes[0].active_cases_TS) 
+		let _self = this
+
+		dates = Object.keys(nodes["AFLITOS"].active_cases_TS)
 		var calendar = this.container.append("div").attr("id","period_analysis_scatter")
 		calendar.append("label").attr("for", "date1_scatter").text(" Data inicial: ").attr("style","font-size: 10px;")               
 		calendar.append("input").attr("id","date1_scatter").attr("style","font-size: 10px;").attr("type","date").attr("value", dates[0])
-			.attr("max", dates[dates.length - 1]).attr("min",dates[0]).on("change", this.updateScatterPlot);
+			.attr("max", dates[dates.length - 1]).attr("min",dates[0]).on("change", function(d,i){ _self.updateScatterPlot()});
 		calendar.append("label").attr("for", "date2_scatter").text(" Data final: ").attr("style","font-size: 10px;")                  
 		calendar.append("input").attr("id","date2_scatter").attr("style","font-size: 10px;").attr("type","date").attr("value", dates[dates.length - 1])
-			.attr("max", dates[dates.length - 1]).attr("min",dates[0]).on("change", this.updateScatterPlot);
+			.attr("max", dates[dates.length - 1]).attr("min",dates[0]).on("change",  function(d,i){ _self.updateScatterPlot()});
 
 		// add select 1 - epidem variables
 	    var dropDownMenu = this.container.select("div").append("div")
 	    	.append("label").attr("for", "ValueOption_1").attr("style","font-size: 10px;").text(" Y: ")
 	    	.append("select")
-			.attr("id","ValueOption_1").attr("style", "font-size: 10px;").attr("name","ValueOption_epidem").on("change", this.updateScatterPlot);
+			.attr("id","ValueOption_1").attr("style", "font-size: 10px;").attr("name","ValueOption_epidem").on("change",  function(d,i){ _self.updateScatterPlot()});
 		d3.select("#ValueOption_1").selectAll("option")            
 				.data(this.opts_y_axis)
 	            .enter()
@@ -68,7 +70,7 @@ class ScatterWidget{
 	    // add select 2 - district variables
 	    var dropDownMenu = this.container.select("div").select("div")
 		dropDownMenu.append("label").attr("for", "ValueOption_2").attr("style","font-size: 10px;").text("   X: ")
-		.append("select").attr("id","ValueOption_2").attr("style", "font-size: 10px;").attr("name","ValueOption_neighborhood").on("change", this.updateScatterPlot);
+		.append("select").attr("id","ValueOption_2").attr("style", "font-size: 10px;").attr("name","ValueOption_neighborhood").on("change",  function(d,i){ _self.updateScatterPlot()});
 		d3.select("#ValueOption_2").selectAll("option")             
 				.data(this.opts_x_axis)
 	            .enter()

@@ -134,7 +134,7 @@ function updateBoundaries() {
 		idx = idx + 1;
     }   
     updateLegend(scale)
-    graphTS.updateTimeSeries(selected_nodes)
+    graphTS.updateTimeSeries()
     updateHistogram()
 }
 
@@ -334,7 +334,7 @@ function loadInterface() {
     updateSelectedNodesDiv();
     graphTS = new TSChartWidget(d3.select("#graphTS"), selected_nodes)
     updateBoundaries();
-    graphSct = new ScatterWidget(d3.select("#graphScatter"))
+    graphSct = new ScatterWidget(d3.select("#graphScatter"), nodes)
 }
 
 function buildCoords() {

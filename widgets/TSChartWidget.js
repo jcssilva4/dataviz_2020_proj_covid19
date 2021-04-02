@@ -9,26 +9,28 @@ class TSChartWidget{
 					{ "text": "Mortos", "value": "deaths" },
 					{ "text": "Mortos per capita", "value": "deathsPC" }];
 		// initialize
-		this.init(selected_nodes);
+		this.init();
     }
 
-    init(selected_nodes){
+    init(){
 		this.container.select("div").remove()
 		dates = Object.keys(selected_nodes[0].active_cases_TS)
+
+		let _self = this
 
 		//calendar
 		let calendar = this.container.append("div").attr("id","period_analysis")
 		calendar.append("label").attr("for", "date1_TS").text(" Data inicial: ").attr("style","font-size: 11px;")                  
 		calendar.append("input").attr("id","date1_TS").attr("style","font-size: 11px;").attr("type","date").attr("value", dates[0])
-			.attr("max", dates[dates.length - 1]).attr("min",dates[0]).on("change", this.updateTimeSeries);
+			.attr("max", dates[dates.length - 1]).attr("min",dates[0]).on("change", function(d,i){ _self.updateTimeSeries()});
 		calendar.append("label").attr("for", "date2_TS").text(" Data final: ").attr("style","font-size: 11px;")                  
 		calendar.append("input").attr("id","date2_TS").attr("style","font-size: 11px;").attr("type","date").attr("value", dates[dates.length - 1])
-			.attr("max", dates[dates.length - 1]).attr("min",dates[0]).on("change", this.updateTimeSeries);
+			.attr("max", dates[dates.length - 1]).attr("min",dates[0]).on("change", function(d,i){ _self.updateTimeSeries()});
 
 		// dropdown menu time series
 	    let dropDownMenu = this.container.append("div").attr("div","select_div")
 	    .append("label").attr("for", "ValueOption_TS").text(" Variável de interesse: ").attr("style","font-size: 11px;")
-	    .append("select").attr("style","font-size: 11px;").attr("id","ValueOption_TS").attr("name","ValueOption_TS").on("change", this.updateTimeSeries);
+	    .append("select").attr("style","font-size: 11px;").attr("id","ValueOption_TS").attr("name","ValueOption_TS").on("change", function(d,i){ _self.updateTimeSeries()});
 		dropDownMenu.selectAll("option")            
 				.data(this.opts)
 	            .enter()
@@ -41,10 +43,10 @@ class TSChartWidget{
 	                    return null;
 	            })
 	            .text(d=>d.text)
-		this.updateTimeSeries(selected_nodes)
+		this.updateTimeSeries()
 	}
 
-	updateTimeSeries(selected_nodes){
+	updateTimeSeries(){
 		let selected_data_opt = d3.select("#ValueOption_TS").node().selectedOptions[0]
 		let date1 = d3.select("#date1_TS").node().value
 		let date2 = d3.select("#date2_TS").node().value
