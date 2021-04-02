@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8" />
+<!--flexbox guide: https://css-tricks.com/snippets/css/a-guide-to-flexbox/-->
+<head>
+        <link rel="stylesheet" href="../css/leaflet.css">
+        </link>
+
+        <style>
+            body{
+                background-color: #008B8B;
+            }
+            .title{
+                justify-content: center;
+                display: flex;
+                border-bottom: 2px solid black; 
+            }
+            #titleText{
+                font-size: 20px;
+                color: white;
+                font-family: "Arial Black", sans-serif;
+            }
+            .firstRow{
+                padding-top: 10px;
+                padding-left: 4px;
+                display: flex;
+                flex-direction: row;
+            }
+            #map{
+                height:700px;
+                width:800px;
+            }
+            .graphs_aside{
+                flex-direction: column;
+                justify-content: center;
+                display: flex;
+            }
+            .graphs_aboveTS{
+                flex-direction: row;
+                justify-content: center;
+                display: flex;
+            }
+            #graphTS{
+                padding: 10px;
+                background-color: white;
+                border-radius: 10px;
+                margin: 2px;
+            }
+            #graphScatter{
+                padding: 5px;
+                background-color: white;
+                border-radius: 10px;
+                margin: 2px;
+            }
+            #graphHist{
+                padding: 12px;
+                background-color: white;
+                border-radius: 10px;
+                margin: 2px;  
+            }
+            #text_hist{
+                font-size: 15px;
+                font-family: "Arial Black", sans-serif;
+            }
+        </style>
+</head>
+
+<body>
+
+    <div class = "title"><h1 id = "titleText">Monitoramento e Análise da COVID-19 em Recife</h1></div>
+    <div class='firstRow'>
+        <div>
+            <div id="map"></div>
+        </div>
+        <div class = graphs_aside> 
+            <div class = "graphs_aboveTS">
+                <div id="graphScatter" class="graph_2"></div>
+                <div id="graphHist"><h1 id = "text_hist">Duração da doença</h1></div>
+            </div>
+            <div id="graphTS" class="graph_1"></div>
+        </div>
+    </div>
+    <script src="../lib/d3.v5.min.js"></script>
+    <script src="../lib/turf.min.js"></script>
+    <script src="../lib/leaflet.js"></script>
+    <script src="../lib/leaflet.polylineDecorator.js"></script>
+    <script src="../lib/RowChart.js"></script>
+    <script src="../lib/scat.js"></script>
+    <script src="../data/bairros_data.js"></script>
+    <script src="../data/boundariesBairros.js"></script>
+    <script src="../widgets/TSChartWidget.js"></script>
+    <script src="../widgets/ScatterWidget.js"></script>
+
+    <script src="main.js"></script>
+
+</body>
+
+</html>

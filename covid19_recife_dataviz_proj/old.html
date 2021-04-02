@@ -1,0 +1,123 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+
+    
+     <link rel="stylesheet" href="../css/leaflet.css"></link>
+    <style>
+		html, body {
+			height: 100%;
+			margin: 0;
+			padding: 5px;
+		}
+		#map {
+			width: 100%;
+			height: 80%;
+		}
+		.legend {
+		    line-height: 18px;
+		    color: #555;
+		    background:  #fff;
+		    
+		}
+		.legend i {
+		    width: 18px;
+		    height: 18px;
+		    float: left;
+		    margin-right: 8px;
+		    opacity: 0.7;
+		}
+		.controlsDiv{
+		    border:1px solid black;
+		}
+
+		.container {
+		    width: 95%;
+		    height: 800px;
+		    margin: auto;
+
+		}
+
+		.one {
+		    width: 60%;
+		    height: 800px;
+		    float: left;
+		    padding: 10px;
+		    margin-left: 10px;
+		}
+
+		.two {		    
+		    height: 800px;
+		}
+
+		.two_one {		    
+		    height: 330px;
+		}
+
+		.two_two {		    
+		    height: 400px;
+		}
+		
+	</style>
+
+  </head>
+  <body>
+    
+    <script src="../lib/d3.v5.min.js"></script>
+    <script src="../lib/turf.min.js"></script>
+    <script src="../lib/leaflet.js"></script>
+    <script src="../lib/leaflet.polylineDecorator.js"></script>
+    <script src="../lib/RowChart.js"></script>
+    <script src="../lib/BarChartWidget.js"></script>
+    <script src="../lib/scat.js"></script>
+    <script src="../lib/ScatterplotWidget.js"></script>
+    
+	<div class="controlsDiv">
+	  <label for="thresholdSlider">
+	    <span>Limiar de mobilidade:</span>
+	    <input type="range" name="thresholdSlider" id="threshold" min="0" max="200" value="0">&nbsp;
+	    <span for="thresholdSlider" id="thSliderValue"> 0%</span>
+
+	    
+	  </label>
+	  &nbsp;&nbsp;&nbsp;
+
+	  <label>
+	    <input type="checkbox" id="singletonsCB" class="filled-in" name="singletonCB" checked></input>
+            <span>Show Singletons</span>
+	  </label>
+
+	  <label>
+	    <input type="checkbox" id="polygonsCB" class="filled-in" name="polygonCB">
+            <span>Show Polygons</span>
+	  </label>
+
+	  <label>
+	    <input type="checkbox" id="polygonsRECB" class="filled-in" name="polygonRECB">
+            <span>Show FOI/ROIPolygons</span>
+	  </label>
+	  
+	  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      
+	  <label for="colorByMenu">Colorir por:</label>
+	  <select name="colorByMenu" id="colorSelect">
+	    <option value="cluster">Cluster ID</option>
+	    <option value="cases">Active Cases</option>
+	    <option value="casesPC">Active Cases Per Capita</option>
+	  </select>
+	</div>
+        <div id="map"></div>
+	
+    	<div id="barchartDiv"></div>
+	</br>
+	</br>
+	</br>
+	<div id="scatterDiv"></div>
+    <script src="../data/graphBairros2.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
