@@ -93,7 +93,7 @@ class ScatterWidget{
 		let date2 = d3.select("#date2_scatter").node().value
 		//console.log(selected_data_opt.value)
 		// dimensions for our svg and graph
-	    var margin = {top: 20, right: 2, bottom: 20, left: 20};
+	    var margin = {top: 20, right: 2, bottom: 20, left: 30};
 		var svgWidth = 330;
 		var svgHeight = 300;
 		var graphWidth = svgWidth - margin.left - margin.right;
